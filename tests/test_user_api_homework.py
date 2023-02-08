@@ -24,6 +24,13 @@ def test_update_user_schema():
     }
 
     result = requests.put('https://reqres.in/api/users/2', update_user)
+    logging.info(result.json())
 
     assert result.status_code == 200
     assert S(update_user_schema) == result.json()
+
+
+def test_delete_user_schema():
+    result = requests.delete('https://reqres.in/api/users/2')
+
+    assert result.status_code == 204
