@@ -14,13 +14,13 @@ user = Schema(
 )
 
 support = Schema(
-{
-            "url": str,
-            "text": str,
-            # Optional("new"): int - указывает, что поле либо вернется либо нет
-        },
-        required=True,
-        extra=PREVENT_EXTRA
+    {
+        "url": str,
+        "text": str,
+        # Optional("new"): int - указывает, что поле либо вернется либо нет
+    },
+    required=True,
+    extra=PREVENT_EXTRA
 )
 
 single_user_schema = Schema(
@@ -44,4 +44,14 @@ users_list_schema = Schema(
     }
 )
 
+create_user_schema = Schema(
+    {
+        "name": str,
+        "job": str,
+        "id": str,
+        "createdAt": str
+    },
+    required=True,
+    extra=PREVENT_EXTRA
 
+)
