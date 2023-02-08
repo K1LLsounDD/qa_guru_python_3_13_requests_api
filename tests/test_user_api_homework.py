@@ -1,7 +1,8 @@
 import requests
 import logging
 from pytest_voluptuous.voluptuous import S
-from schemas.user import create_user_schema, update_user_schema, login_successful_schema, register_user_schema
+from schemas.user import create_user_schema, update_user_schema, login_successful_schema, register_user_schema, \
+    login_unsuccessful_schema
 
 
 def test_create_user_schema():
@@ -60,6 +61,20 @@ def test_user_login_successful_schema():
     assert result.status_code == 200
     assert result.json()["token"] is not None
     assert S(login_successful_schema) == result.json()
+
+
+def test_user_login_unsuccessful_schema():
+    user_login = {
+        "email": "peter@klaven"
+    }
+
+    result = requests.post(f'{base_url}/api/login', user_login)
+    logging.info(result.json())
+
+    assert result.status_code == 400
+    assert result.json()["error"] == "Missing password"
+    assert len(result.json()) == 1
+    assert S(login_unsuccessful_schema) == result.json()
 
 
 base_url = 'https://reqres.in'

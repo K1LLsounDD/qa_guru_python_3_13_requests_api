@@ -82,3 +82,9 @@ register_user_schema = Schema(
     required=True,
     extra=PREVENT_EXTRA
 )
+
+login_unsuccessful_schema = Schema(
+{
+    "error": str
+}
+)
