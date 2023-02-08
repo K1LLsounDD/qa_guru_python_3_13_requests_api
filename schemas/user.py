@@ -57,10 +57,18 @@ create_user_schema = Schema(
 )
 
 update_user_schema = Schema(
-{
+    {
         "name": str,
         "job": str,
         "updatedAt": str
+    },
+    required=True,
+    extra=PREVENT_EXTRA
+)
+
+login_successful_schema = Schema(
+    {
+        "token": str
     },
     required=True,
     extra=PREVENT_EXTRA

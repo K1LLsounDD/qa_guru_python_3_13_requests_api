@@ -1,7 +1,7 @@
 import requests
 import logging
 from pytest_voluptuous.voluptuous import S
-from schemas.user import create_user_schema, update_user_schema
+from schemas.user import create_user_schema, update_user_schema, login_successful_schema
 
 
 def test_create_user_schema():
@@ -34,3 +34,16 @@ def test_delete_user_schema():
     result = requests.delete('https://reqres.in/api/users/2')
 
     assert result.status_code == 204
+
+
+def test_user_login_successful_schema():
+    user_login = {
+        "email": "eve.holt@reqres.in",
+        "password": "cityslicka"
+    }
+
+    result = requests.post('https://reqres.in/api/login', user_login)
+    logging.info(result.json())
+
+    assert result.status_code == 200
+    assert S(login_successful_schema) == result.json()
