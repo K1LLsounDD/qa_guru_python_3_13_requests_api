@@ -73,3 +73,12 @@ login_successful_schema = Schema(
     required=True,
     extra=PREVENT_EXTRA
 )
+
+register_user_schema = Schema(
+    {
+        "id": int,
+        "token": str
+    },
+    required=True,
+    extra=PREVENT_EXTRA
+)
