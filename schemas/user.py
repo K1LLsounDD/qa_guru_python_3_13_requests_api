@@ -55,3 +55,13 @@ create_user_schema = Schema(
     extra=PREVENT_EXTRA
 
 )
+
+update_user_schema = Schema(
+{
+        "name": str,
+        "job": str,
+        "updatedAt": str
+    },
+    required=True,
+    extra=PREVENT_EXTRA
+)
